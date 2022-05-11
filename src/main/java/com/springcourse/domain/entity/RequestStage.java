@@ -29,7 +29,7 @@ public class RequestStage implements Serializable {
     private Date realizationDate;
     @Column(length = 12, nullable = false)
     @Enumerated(EnumType.STRING)
-    private RequestState stage;
+    private RequestState state;
     @ManyToOne
     @JoinColumn(name = "request_id", nullable=false)
     private Request request;

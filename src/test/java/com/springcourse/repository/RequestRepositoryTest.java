@@ -16,6 +16,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -72,6 +74,12 @@ public class RequestRepositoryTest {
 
         //act
         assert(requests.size()==1);
+    }
+
+    @Test
+    public void updateStatusTest(){
+        int affectedRows = requestRepository.updateStatus(1L, RequestState.IN_PROGRESS);
+        assertThat(affectedRows).isEqualTo(1);
     }
 
 }

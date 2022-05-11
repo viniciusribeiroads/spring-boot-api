@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class RequestServer {
+public class RequestService {
 
     private RequestRepository requestRepository;
 
