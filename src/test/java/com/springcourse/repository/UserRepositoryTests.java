@@ -36,11 +36,11 @@ public class UserRepositoryTests {
 
     @Test
     public void updateTest(){
-        User user = new User(1L, "Kevin Wingi", "kevin.wingin@gmail.com", "123", Role.ADMINISTRATOR, null, null);
+        User user = new User(1L, "Kevin Wingo", "kevin.wingin@gmail.com", "123", Role.ADMINISTRATOR, null, null);
         User updatedUser = userRepository.save(user);
 
         //act
-        assert(updatedUser.getName()).equals("Kevin Wingi");
+        assert(updatedUser.getName()).equals("Kevin Wingo");
     }
 
     @Test

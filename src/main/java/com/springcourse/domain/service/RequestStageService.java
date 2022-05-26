@@ -3,6 +3,7 @@ package com.springcourse.domain.service;
 import com.springcourse.domain.entity.Request;
 import com.springcourse.domain.entity.RequestStage;
 import com.springcourse.domain.enums.RequestState;
+import com.springcourse.domain.exception.NotFoundException;
 import com.springcourse.repository.RequestRepository;
 import com.springcourse.repository.RequestStageRepository;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,7 @@ public class RequestStageService {
 
         RequestStage createdStage = requestStageRepository.save(stage);
 
-        Long requestId = stage.getId();
+        Long requestId = stage.getRequest().getId();
         RequestState state = stage.getState();
 
         requestRepository.updateStatus(requestId, state);
@@ -33,7 +34,7 @@ public class RequestStageService {
 
     public RequestStage getBy(Long id){
         Optional<RequestStage> result = requestStageRepository.findById(id);
-        return result.get();
+        return result.orElseThrow(()-> new NotFoundException("There are not request stage with id = " + id));
     }
 
     public List<RequestStage> listAllByRequestId(Long requestId){

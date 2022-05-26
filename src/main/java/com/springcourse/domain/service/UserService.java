@@ -1,6 +1,7 @@
 package com.springcourse.domain.service;
 
 import com.springcourse.domain.entity.User;
+import com.springcourse.domain.exception.NotFoundException;
 import com.springcourse.domain.util.HashUtil;
 import com.springcourse.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,7 @@ public class UserService {
 
     public User getById(Long id){
         Optional<User> result = userRepository.findById(id);
-        return result.get();
+        return result.orElseThrow( () -> new NotFoundException("There are not user with id = " + id));
     }
 
     public List<User> findAll(){

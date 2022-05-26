@@ -1,7 +1,9 @@
 package com.springcourse.domain.resource;
 
+import com.springcourse.domain.entity.Request;
 import com.springcourse.domain.entity.User;
 import com.springcourse.domain.resource.dto.UserLoginDto;
+import com.springcourse.domain.service.RequestService;
 import com.springcourse.domain.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,7 @@ import java.util.List;
 @RequestMapping(value = "/users")
 public class UserResource {
     private UserService userService;
+    private RequestService requestService;
 
     @PostMapping
     public ResponseEntity<User> save(@RequestBody User user) {
@@ -47,8 +50,15 @@ public class UserResource {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(loggedUser);
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-
     }
+
+    @GetMapping("/{id}/requests")
+    public ResponseEntity<List<Request>> listAllRequests(@PathVariable(name = "id") Long id){
+        List<Request> requests = requestService.listAllByOwnerId(id);
+        return ResponseEntity.ok(requests);
+    }
+
+
 
 
 

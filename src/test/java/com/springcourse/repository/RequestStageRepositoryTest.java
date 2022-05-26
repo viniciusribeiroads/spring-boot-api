@@ -4,6 +4,7 @@ import com.springcourse.domain.entity.Request;
 import com.springcourse.domain.entity.RequestStage;
 import com.springcourse.domain.entity.User;
 import com.springcourse.domain.enums.RequestState;
+import com.springcourse.domain.enums.Role;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +20,7 @@ import java.util.Optional;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class RequestStateRepositoryTest {
+public class RequestStageRepositoryTest {
 
     @Autowired
     private RequestStageRepository requestStageRepository;
@@ -32,11 +33,11 @@ public class RequestStateRepositoryTest {
         Request request = new Request();
         request.setId(1L);
 
-        RequestStage stage = new RequestStage(null, "Foi comprado um novo laptop de marca HP e com 16GB de RAM", new Date(), RequestState.CLOSE, request, owner);
+        RequestStage stage = new RequestStage(null, "Foi comprado um novo laptop de marca HD e com 16 GB de RAM", new Date(), RequestState.CLOSE, request, owner);
+
         RequestStage createdStage = requestStageRepository.save(stage);
 
-        //act
-        assert(createdStage.getId()).equals(1L);
+        assert(createdStage.getId()==(1));
     }
     @Test
     public void getByIdTest(){
